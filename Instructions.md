@@ -1,6 +1,3 @@
-
----
-
 ## 🖥️ Environment Setup
 
 This project was developed and tested on:
@@ -14,7 +11,6 @@ You can set up the project environment using either `venv` or `conda`.
 
 ## 🔧 Option 1: Using Python's `venv` (Virtual Environment)
 
-```bash
 ### Step 1: Clone the repository
 git clone https://github.com/yourusername/quantized-finance-ml.git
 cd quantized-finance-ml
