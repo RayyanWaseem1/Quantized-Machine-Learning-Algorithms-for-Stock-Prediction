@@ -74,7 +74,7 @@ def evaluate_svm(onnx_path, X, y, scaler):
         outputs = sess.get_outputs()
         output_names = [output.name for output in outputs]
 
-        # Typically, the first output is labels and second is probabilities
+        #The first output is labels and second is probabilities
         if len(output_names) > 1:
             label_name = output_names[0]
             prob_name = output_names[1]
@@ -148,16 +148,15 @@ def run_svm(tickers=['AAPL', 'SPY', 'MSFT']):
       'prob_int8': []
     }
 
-    # Ensure tickers is a list
   if not isinstance(tickers, list):
-      tickers = [tickers]  # Convert to a list if it's a single ticker
+      tickers = [tickers]
 
   for ticker in tickers:
       X, y, dates = load_data(ticker)
 
       if X.empty or y.empty:
           print(f"Data for {ticker} is empty. Skipping...")
-          continue  # Skip to the next ticker if data is empty
+          continue
 
       X_train, X_test, y_train, y_test, train_dates, test_dates = train_test_split(X, y, dates, shuffle=False, test_size=0.2)
 
