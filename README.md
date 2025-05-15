@@ -308,7 +308,7 @@ highlights the generalization capabilities of the quantized
 model.
 
 <img width="496" alt="Screenshot 2025-05-04 at 4 58 24 PM" src="https://github.com/user-attachments/assets/056dff53-95b4-4836-833e-0e369ee89d64" />
-<img width="696" alt="Screenshot 2025-05-04 at 4 55 39 PM" src="https://github.com/user-attachments/assets/bc832255-0a52-44dc-8dd9-d98733afa6b0" />
+<img width="695" alt="Screenshot 2025-05-04 at 4 55 21 PM" src="https://github.com/user-attachments/assets/d984b422-14ba-4d76-a9b9-81697c9bc71f" />
 <img width="696" alt="Screenshot 2025-05-04 at 4 55 39 PM" src="https://github.com/user-attachments/assets/69340cf5-1f0c-44e9-b57c-a85e493f8a4d" />
 <img width="695" alt="Screenshot 2025-05-04 at 4 56 00 PM" src="https://github.com/user-attachments/assets/adc60896-3c84-42e3-9c66-8bf2ca753791" />
 
