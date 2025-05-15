@@ -269,6 +269,9 @@ regression’s stability under quantization and confirms its
 reliability for binary financial classification tasks in resource
 constrained environments.
 
+<img width="631" alt="Screenshot 2025-05-05 at 2 40 41 PM" src="https://github.com/user-attachments/assets/bdd668d4-d2b4-4971-bb04-dfa3b561012c" />
+<img width="951" alt="Screenshot 2025-05-05 at 2 59 29 PM" src="https://github.com/user-attachments/assets/794da9bd-a29b-4a47-8b5d-ccf397578021" />
+
 Inference latency varied modestly across tickers. For
 AAPL, quantization led to a noticeable speedup of
 approximately 12.37% reducing inference time from 0.1099
@@ -280,6 +283,8 @@ These results suggest that while quantization can improve
 speed, the magnitude of gain may be dependent on data-
 specific characteristics.
 
+<img width="793" alt="Screenshot 2025-05-05 at 4 03 13 PM" src="https://github.com/user-attachments/assets/fd49dfa9-2a4d-4409-beda-80d8d93ce9db" />
+
 Contrary to expectations, quantized models exhibited larger
 file sizes than their full precision counterparts. For all three
 datasets, model size increased from 0.5732 KB (FP32) to
@@ -289,6 +294,8 @@ assumptions that quantization always reduces storage
 requirements. A plausible explanation is that ONNX
 serialization overhead becomes dominant in extremely small
 models, as seen here.
+
+<img width="630" alt="Screenshot 2025-05-05 at 2 41 04 PM" src="https://github.com/user-attachments/assets/346e0f94-5fb9-479d-9832-b008dbd3a9f1" />
 
 ### Support Vector Machine (SVM)
 The linear-kernel SVM exhibited similarly favorable
@@ -300,6 +307,11 @@ margin separation, this result is particularly encouraging and
 highlights the generalization capabilities of the quantized
 model.
 
+<img width="496" alt="Screenshot 2025-05-04 at 4 58 24 PM" src="https://github.com/user-attachments/assets/056dff53-95b4-4836-833e-0e369ee89d64" />
+<img width="696" alt="Screenshot 2025-05-04 at 4 55 39 PM" src="https://github.com/user-attachments/assets/bc832255-0a52-44dc-8dd9-d98733afa6b0" />
+<img width="696" alt="Screenshot 2025-05-04 at 4 55 39 PM" src="https://github.com/user-attachments/assets/69340cf5-1f0c-44e9-b57c-a85e493f8a4d" />
+<img width="695" alt="Screenshot 2025-05-04 at 4 56 00 PM" src="https://github.com/user-attachments/assets/adc60896-3c84-42e3-9c66-8bf2ca753791" />
+
 Inference time consistently improved across all datasets.
 The most substantial latency reduction occurred in the AAPL
 model, where inference time decreased from 0.1844
@@ -309,6 +321,8 @@ improvement. MSFT and SPY saw more modest gains of
 the benefit of quantization in real-time financial applications
 where even small latency reductions can scale significantly
 across high-frequency systems.
+
+<img width="495" alt="Screenshot 2025-05-04 at 4 58 56 PM" src="https://github.com/user-attachments/assets/7ecb6220-f954-474d-b99a-d1008082caf4" />
 
 Despite these performance gains, model size again showed
 a marginal increase after quantization. Each SVM model
@@ -320,6 +334,10 @@ suggest again, that ONNX conversion may have introduced
 slight file-level overhead, due to its smaller model
 architecture.
 
+<img width="495" alt="Screenshot 2025-05-04 at 4 59 10 PM" src="https://github.com/user-attachments/assets/a1404fc6-33d1-40ba-acdc-c8533a6b4cec" />
+<img width="494" alt="Screenshot 2025-05-04 at 4 59 27 PM" src="https://github.com/user-attachments/assets/24cfa980-ccd8-4095-aa6f-01d425bce45c" />
+
+
 ### Random Forest
 Random forest, an ensemble learning algorithm known for
 modeling non-linear relationships, showed high predictive
@@ -329,6 +347,11 @@ model’s insensitivity to quantization. This is consistent with
 the inherent structure of decision trees, which operate on
 thresholds and splits, making them naturally robust to reduced
 numerical precision.
+
+<img width="497" alt="Screenshot 2025-05-04 at 6 33 38 PM" src="https://github.com/user-attachments/assets/97ceff64-a31a-4795-bd44-cf657b6c8009" />
+<img width="697" alt="Screenshot 2025-05-04 at 6 30 47 PM" src="https://github.com/user-attachments/assets/dfd29bab-1ba7-41ce-ae43-b75f864224e7" />
+<img width="696" alt="Screenshot 2025-05-04 at 6 31 11 PM" src="https://github.com/user-attachments/assets/cbc41ff3-830e-40ec-aafd-d3a3870675f4" />
+<img width="696" alt="Screenshot 2025-05-04 at 6 31 41 PM" src="https://github.com/user-attachments/assets/1cf4da86-18a4-4b3f-83e1-6052c2bec469" />
 
 However, in contrast to logistic regression and SVM,
 quantized yielded negligible or even negative effects on
@@ -341,6 +364,8 @@ quantization in inference latency are less pronounced and may
 depend heavily on the number of estimators, tree-depth, and
 implementation-level optimizations.
 
+<img width="494" alt="Screenshot 2025-05-04 at 6 33 53 PM" src="https://github.com/user-attachments/assets/2384be33-6f19-4df9-8d7f-d01f6203a62a" />
+
 The model size remained nearly constant post-quantization.
 Across all datasets, the change in size was virtually negligible,
 with differences in the range of 0.01 - 0.02 KB. This suggests
@@ -350,6 +375,10 @@ large due to the aggregation of multiple trees. Therefore, while
 quantization preserves accuracy in random forests, its practical
 benefits in reducing model size or latency appear limited in this
 particular context.
+
+<img width="495" alt="Screenshot 2025-05-04 at 6 34 14 PM" src="https://github.com/user-attachments/assets/c6ad7562-0153-4a8e-8ad2-2b0d6f693556" />
+<img width="496" alt="Screenshot 2025-05-04 at 6 34 46 PM" src="https://github.com/user-attachments/assets/f15b31d2-ed92-47e4-b93f-0f8588338f4a" />
+<img width="595" alt="Screenshot 2025-05-04 at 6 35 11 PM" src="https://github.com/user-attachments/assets/8c723c8c-9740-4cfd-aac1-62f175e5b06f" />
 
 ## Conclusion
 The experimental results provide compelling evidence that
