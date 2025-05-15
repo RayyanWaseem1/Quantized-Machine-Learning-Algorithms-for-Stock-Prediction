@@ -70,9 +70,7 @@ def train_logistic_regression(X_train, y_train):
   model.fit(X_train, y_train)
   return model
 
-"""Logistic Regression Export to ONNX
-
-"""
+"""Logistic Regression Export to ONNX"""
 
 def export_to_onnx(model, X_sample, filename = 'model.onnx'):
   initial_type = [('float_input', FloatTensorType([None, X_sample.shape[1]]))]
@@ -130,7 +128,7 @@ def run_ticker(ticker):
 
   print(" -- Feature Engineering -- ")
   try:
-    X, y, dates = features(df)  # dates is the full DataFrame index
+    X, y, dates = features(df)
     print(f"Data Shape after feature engineering: {X.shape}")
   except ValueError as e:
     print(f"Error during feature engineering: {e}")
@@ -187,7 +185,7 @@ def run_ticker(ticker):
       'Time INT8 (ms)': time_int8,
       'Size FP32 (KB)': size_fp32,
       'Size INT8 (KB)': size_int8,
-      'test_dates': idx_test,  # Store the actual test dates
+      'test_dates': idx_test,
       'all_dates': dates.tolist(),
       'y_test': y_test,
       'prediction_int8': prediction_int8
@@ -253,10 +251,6 @@ def main():
     try:
       ticker = result['Ticker']
       plt.figure(figsize=(12, 5))
-
-      # Since we're getting persistent indexing issues with the dates,
-      # let's simplify by just using a sequential x-axis (0, 1, 2, etc.)
-      # and annotate with a few actual dates as tick labels
 
       # Get the test data
       y_test = np.array(result['y_test'])
