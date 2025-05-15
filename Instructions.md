@@ -17,8 +17,10 @@ cd quantized-finance-ml
 
 ### Step 2: Create and activate a virtual environment
 python3 -m venv venv
-source venv/bin/activate        For macOS/Linux
-.\venv\Scripts\activate        For Windows
+source venv/bin/activate        
+- For macOS/Linux
+.\venv\Scripts\activate        
+- For Windows
 
 ### Step 3: Install dependencies
 pip install -r requirements.txt
