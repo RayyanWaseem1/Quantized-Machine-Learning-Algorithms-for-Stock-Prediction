@@ -88,7 +88,7 @@ libraries and executed on a CPU-only environment.
 Feature engineering steps were tailored to each model
 class:
 
-#^  For all models, daily return was calculated as the
+#### For all models, daily return was calculated as the
 percentage change in closing price. Rolling indicators
 such as the 5-, 10-, and 20-day moving averages
 (MA5, MA10, MA20), and 20-day volatility were
