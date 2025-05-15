@@ -25,6 +25,7 @@ np.random.seed(42)
 """Load and Prepare Data"""
 
 def load_data(ticker = 'AAPL', period = '2y', interval = '1d'):
+  
   #load stock data and prepare features
   df = yf.download(ticker, period = period, interval = interval)
   df.dropna(inplace = True)
@@ -175,15 +176,13 @@ def run_rf(tickers=['AAPL', 'SPY', 'MSFT']):
     'prob_int8': []
   }
 
-  # Ensure tickers is a list
   if not isinstance(tickers, list):
-    tickers = [tickers]  # Convert to a list if it's a single ticker
+    tickers = [tickers]
 
   for ticker in tickers:
     print(f"\n==== Processing {ticker} ====")
     X, y, dates = load_data(ticker)
 
-    # Check if data is empty using correct method for each data type
     if isinstance(X, pd.DataFrame) and X.empty:
       print(f"Data for {ticker} is empty. Skipping...")
       continue
@@ -191,7 +190,6 @@ def run_rf(tickers=['AAPL', 'SPY', 'MSFT']):
       print(f"Data for {ticker} is empty. Skipping...")
       continue
 
-    # Similarly for y
     if isinstance(y, pd.Series) and y.empty:
       print(f"Target data for {ticker} is empty. Skipping...")
       continue
@@ -227,12 +225,10 @@ def run_rf(tickers=['AAPL', 'SPY', 'MSFT']):
     print(f"Quantizing model...")
     quantize_model(onnx_fp32_path, onnx_int8_path)
 
-    # Evaluate - I noticed another issue here with function name
     print(f"Evaluating models...")
     accuracy_fp32, preds_fp32, prob_fp32 = evaluate_random_forest(onnx_fp32_path, X_test, y_test, scaler)
     accuracy_int8, preds_int8, prob_int8 = evaluate_random_forest(onnx_int8_path, X_test, y_test, scaler)
 
-    # Benchmark - Another issue here with function name
     print(f"Benchmarking inference time...")
     time_fp32 = benchmark_rf(onnx_fp32_path, X_test, scaler, n_runs=100)
     time_int8 = benchmark_rf(onnx_int8_path, X_test, scaler, n_runs=100)
@@ -301,7 +297,6 @@ def run_rf(tickers=['AAPL', 'SPY', 'MSFT']):
       'Size Reduction': [(fp32 - int8) / fp32 * 100 for fp32, int8 in zip(results['size_fp32'], results['size_int8'])]
   })
 
-  # Display
   summary_df.set_index('Ticker', inplace=True)
   print("\n==== Summary ====")
   print(summary_df)
@@ -309,7 +304,6 @@ def run_rf(tickers=['AAPL', 'SPY', 'MSFT']):
   return summary_df, results
 
 def create_visualizations(ticker, dates, actual, pred_fp32, pred_int8, prob_fp32, prob_int8):
-  # Converting dates to pandas datetime
   dates_pd = pd.to_datetime(dates)
 
   # Visualization 1: Actual vs Predicted (Binary)
@@ -409,7 +403,7 @@ def create_visualizations(ticker, dates, actual, pred_fp32, pred_int8, prob_fp32
   plt.show()
 
   # Visualization 3: Moving Average of Prediction Accuracy
-  window_size = min(10, len(actual) // 5)  # Adaptive window size
+  window_size = min(10, len(actual) // 5)
   plt.figure(figsize=(14, 6))
 
   # Calculate rolling accuracy
