@@ -1,5 +1,9 @@
 # Quantized-Machine-Learning-Algorithms-for-Stock-Prediction
 
+## Instructions
+Instructions for how to run this project can be found here:
+<https://github.com/RayyanWaseem1/Quantized-Machine-Learning-Algorithms-for-Stock-Prediction/blob/main/Instructions.md>
+
 ## Introduction
 In the contemporary landscape of quantitative finance and
 predictive modeling, the ability to make timely and accurate
@@ -69,8 +73,6 @@ which often require an extensive computational appetite, the
 selected models strike a balance between transparency,
 performance, optimization, and scalability - making them ideal
 candidates for quantization.
-
-## Repository
 
 ## Methodology 
 This section presents the end-to-end design and
