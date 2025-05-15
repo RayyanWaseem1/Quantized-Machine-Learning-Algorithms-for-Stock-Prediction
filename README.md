@@ -95,4 +95,61 @@ The target variable was binary: 1 if the next day’s return
 was positive, and 0 otherwise. Data was cleaned to remove
 rows with missing values due to rolling calculations. For each
 ticker, an 80/20 time-series split was applied, preserving
-temporal structu
+temporal structure. All features were standardized using
+StandardScaler.
+
+### Model Training
+Each model was trained on the unquantized (FP32) feature
+using scikit-learn:
+* Logistic Regression was trained using (LogisticRegression(max_iter = 1000) with L2 regularization. This served as a transparent baseline model.
+* Support Vector Machine used a linear kernel (SVC(kernel = ‘linear’, probability = True)) and was trained with default hyperparameters.
+* Random Forest was configured with 100 trees, a maximum depth of 10, and minimum samples per leaf and split set to 2 and 5 respectively (RandomForestClassifier(…)).
+
+Training was executed on the CPU using reproducible
+random seeds. Models were evaluated on the test set using
+classification accuracy.
+
+### ONNX Conversion and Quantization
+Each trained model was exported to ONNX format using
+the skl2onnx package. This required defining an input type
+schema using FloatTensorType, followed by serialization to
+a .onnx file.
+
+Post-training quantization was performed using ONNX
+Runtime’s quantize_dynamic method with weight type
+QuantType.QUInt8 (or QInt8 for logistic regression). This
+converted model weights and operators to INT8 precision.
+
+### Model Evaluation and Benchmarking
+Model evaluation was carried out using ONNX Runtime’s
+InferenceSession for both FP32 and quantized INT8 models.
+The following performance metrics were recorded:
+* Accuracy was calculated using accuracy_score from scikit-learn on the test set for both models.
+* Inference latency was measured by running 100 forward passes and averaging the elapsed time using time.perf_counter() or time.time(). A warm-up pass was included to mitigate cold start effects.
+*  Model size was calculated by inspecting the size of the .onnx files using os.path.getsize().
+
+All inference was performed using the CPUExecutionProvider in ONNX Runtime. The SVM and
+Random Forest implementations additionally extracted class
+probabilities form the quantized models and compared them to
+binary ground truth labels.
+
+Confusion matrices were printed to visualize prediction
+distribution across actual classes. Rolling prediction accuracy
+was plotted using a sliding window approach to detect periods
+of temporal degradation or improvement.
+
+### Visualization and Analysis
+The project produced detailed visual outputs for each
+model and ticker:
+* Actual vs. Predicted Direction plots for both FP32 and INT8 models
+* Probability score distributions and correct/incorrect classification overlays
+* Rolling accuracy plots showing fluctuations in predictive perfjoamcne over time
+* Comparison bar charts for FP32 and INT8 accuracy, inference time, and model size
+* Bubble charts and percentage improvement plots, highlighting the trade-offs between accuracy and efficiency.
+
+This complete pipeline - ranging from data engineering and
+model training to ONNX quantization and CPU benchmarking - provides a robust and reproducible framework for evaluation
+quantized classical machine learning models in financial
+forecasting applications. The code base can be reused across
+domains where resource-efficiency and real-time inference are
+necessary.
