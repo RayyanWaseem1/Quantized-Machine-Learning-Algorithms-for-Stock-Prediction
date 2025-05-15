@@ -88,8 +88,11 @@ libraries and executed on a CPU-only environment.
 Feature engineering steps were tailored to each model
 class:
 
-#### For all models, daily return was calculated as the
-percentage change in closing price. Rolling indicators
-such as the 5-, 10-, and 20-day moving averages
-(MA5, MA10, MA20), and 20-day volatility were
-added
+* For all models, daily return was calculated as the percentage change in closing price. Rolling indicators such as the 5-, 10-, and 20-day moving averages (MA5, MA10, MA20), and 20-day volatility were added.
+* The random forest model included additional technical indicators, such as Relative Strength Index (RSI) and Moving Average Convergence Divergence (MACD) to enhance nonlinear pattern detection.
+
+The target variable was binary: 1 if the next day’s return
+was positive, and 0 otherwise. Data was cleaned to remove
+rows with missing values due to rolling calculations. For each
+ticker, an 80/20 time-series split was applied, preserving
+temporal structu
